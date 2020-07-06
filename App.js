@@ -1,8 +1,29 @@
 // import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 export default function App() {
+  // hooookkkkkss + form 
+  const [enteredGoal, setEnteredGoal] = useState('')
+  const [courseGoals, setCourseGoals] = useState([])
+
+  const goalInputHandler = (enteredText) => {
+    setEnteredGoal(enteredText);
+  }
+
+  const addGoalHandler = () => {
+    // going to add the form value into a hook that will hold all the goals that you add 
+
+    // setCourseGoals([...courseGoals,  enteredGoal]);
+    // probably a better way to handle this is to arrow function to use old state directly instead of referring to the hook getter 
+    // this make the single source of truth a little bit more clear in async time 
+    setCourseGoals(currentGoals => [...currentGoals, enteredGoal])
+
+    setEnteredGoal('');
+  }
+
+
+
   return (
     // style={} requires an object. thus the double curley
     // <View 
@@ -40,19 +61,31 @@ export default function App() {
         <TextInput 
           placeholder="Course Goal" 
           style={styles.inputBox}
+          // only put the function, don't execute because it's being called back on onChange 
+          onChangeText={goalInputHandler}
+          // and then show the value of the hook 
+          value={enteredGoal}
         /> 
 
         {/* in docs you can see what kind of styling object key-value pairs you can use on the native elements */}
         <Button 
           title="add" 
-          style={{
-            flex: 1,
-            border: 10
-          }}
+          // style={{
+          //   flex: 1,
+          //   border: 10
+          // }}
+
+          // this is going to let us trigger a callback to addGoalHandler which will changeState/API call and then clear the form again 
+          onPress={addGoalHandler}
         />
         {/* uhh... i duno why but the button isn't filling in the proper amount of space.  */}
       </View>
       <View>
+        {/* going to show all the goals we added  */}
+
+        {/* going to have to iterate because array  */}
+        {/* this gon throw error because key in child but whatever  */}
+        {courseGoals.map(goal=> <Text>{goal}</Text>)}
 
       </View>
     </View>
