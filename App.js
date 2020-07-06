@@ -8,10 +8,23 @@ export default function App() {
     <View style={{padding: 50}}>
       {/* view is most like div but unlike HTML you can't just put text inside the view, it has to be inside text component */}
       {/* it's always nice to start with view because its the most flexible in terms of styling and because you need one wrapping compoenent at the top level */}
-      <View>
-        <TextInput placeholder="Course Goal" style={{borderColor: 'black', borderWidth: 1, padding: 10 }}/> 
-        {/* in docs you can see what kind of styling object key-value pairs you can use on the native elements */}
 
+      {/* now going to add some flexbox stuff and additional prop modifiers with inline style */}
+      <View 
+        style={{
+          flexDirection: 'row', 
+          justifyContent: 'space-between', 
+          alignItems: 'center'
+        }}>
+        <TextInput 
+          placeholder="Course Goal" 
+          style={{
+            borderColor: 'black', 
+            borderWidth: 1, 
+            padding: 10 
+          }}/> 
+
+        {/* in docs you can see what kind of styling object key-value pairs you can use on the native elements */}
         <Button title="add" />
       </View>
       <View>
