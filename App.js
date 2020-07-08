@@ -1,6 +1,6 @@
 // import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
 
 export default function App() {
   // hooookkkkkss + form data
@@ -83,7 +83,10 @@ export default function App() {
         />
         {/* uhh... i duno why but the button isn't filling in the proper amount of space.  */}
       </View>
-      <View>
+
+      {/* making the list into a scrollable area  */}
+      {/* so the top isn't scrollable but the list is */}
+      <ScrollView>
         {/* going to show all the goals we added  */}
 
         {/* going to have to iterate because array  */}
@@ -94,7 +97,7 @@ export default function App() {
             <Text>{goal}</Text>
           </View>)
         )}
-      </View>
+      </ScrollView>
     </View>
   );
 }
