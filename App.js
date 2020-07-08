@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 export default function App() {
-  // hooookkkkkss + form 
+  // hooookkkkkss + form data
   const [enteredGoal, setEnteredGoal] = useState('')
+
+  // collection list of all the form submissions 
   const [courseGoals, setCourseGoals] = useState([])
 
   const goalInputHandler = (enteredText) => {
@@ -19,6 +21,7 @@ export default function App() {
     // this make the single source of truth a little bit more clear in async time 
     setCourseGoals(currentGoals => [...currentGoals, enteredGoal])
 
+    // and of course clear the form field 
     setEnteredGoal('');
   }
 
@@ -91,6 +94,7 @@ export default function App() {
     </View>
   );
 }
+
 
 
 // later on probably better to actually put all the inline styling into this section but for now just going to style attr it 
