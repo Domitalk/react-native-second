@@ -88,8 +88,12 @@ export default function App() {
 
         {/* going to have to iterate because array  */}
         {/* this gon throw error because key in child but whatever  */}
-        {courseGoals.map(goal=> <Text>{goal}</Text>)}
-
+        {/* text doesn't have style but view does, so wrap the text in a view  */}
+        {courseGoals.map(goal=> (
+          <View key={goal} style={styles.listItem}>
+            <Text>{goal}</Text>
+          </View>)
+        )}
       </View>
     </View>
   );
@@ -121,6 +125,11 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 3
   },
-
-
+  listItem: {
+    padding: 10,
+    marginVertical: 10,
+    backgroundColor: '#ccc',
+    borderColor: 'black',
+    borderWidth: 1
+  }
 });
