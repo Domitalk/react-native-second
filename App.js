@@ -1,6 +1,6 @@
 // import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
 
 export default function App() {
   // hooookkkkkss + form data
@@ -19,7 +19,10 @@ export default function App() {
     // setCourseGoals([...courseGoals,  enteredGoal]);
     // probably a better way to handle this is to arrow function to use old state directly instead of referring to the hook getter 
     // this make the single source of truth a little bit more clear in async time 
-    setCourseGoals(currentGoals => [...currentGoals, enteredGoal])
+    setCourseGoals(currentGoals => [
+      ...currentGoals, 
+      { id: Math.random().toString(), value: enteredGoal }
+    ])
 
     // and of course clear the form field 
     setEnteredGoal('');
@@ -86,18 +89,35 @@ export default function App() {
 
       {/* making the list into a scrollable area  */}
       {/* so the top isn't scrollable but the list is */}
-      <ScrollView>
+      {/* <ScrollView> */}
+        {/* scrollview might be bad if your list gets way too big, because it's going to fully render in the beginning instead of infinitescroll  */}
+
+        {/* FlatList is like infiniteScroll object but you have to self-close it    */}
+        {/* flatlist automatically adds keys to data but only if its in a familiar shape.  */}
+      <FlatList 
+        // keyExtractor is also built in and takes two args (item, index) but otherwise key as a key in the object will automake id 
+        keyExtractor={(item, index) => item.id}
+        data={courseGoals} 
+        renderItem={itemData => (
+          <View style={styles.listItem}>
+            {/* item is a preassigned key that comes with the renderItem prop in FlatList */}
+            <Text>{itemData.item.value}</Text>
+          </View>
+        )} 
+      />
+
         {/* going to show all the goals we added  */}
 
         {/* going to have to iterate because array  */}
         {/* this gon throw error because key in child but whatever  */}
         {/* text doesn't have style but view does, so wrap the text in a view  */}
-        {courseGoals.map(goal=> (
+        {/* {courseGoals.map(goal=> (
           <View key={goal} style={styles.listItem}>
             <Text>{goal}</Text>
           </View>)
-        )}
-      </ScrollView>
+        )} */}
+
+      {/* </View> */}
     </View>
   );
 }
