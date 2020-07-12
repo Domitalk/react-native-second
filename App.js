@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
 
+
+import GoalItem from './components/GoalItem'
+
 export default function App() {
   // hooookkkkkss + form data
   const [enteredGoal, setEnteredGoal] = useState('')
@@ -98,13 +101,9 @@ export default function App() {
         // keyExtractor is also built in and takes two args (item, index) but otherwise key as a key in the object will automake id 
         keyExtractor={(item, index) => item.id}
         data={courseGoals} 
-        renderItem={itemData => (
-          <View style={styles.listItem}>
-            {/* item is a preassigned key that comes with the renderItem prop in FlatList */}
-            <Text>{itemData.item.value}</Text>
-          </View>
-        )} 
+        renderItem={itemData => <GoalItem title={itemData.item.value}/> } 
       />
+     
 
         {/* going to show all the goals we added  */}
 
@@ -119,6 +118,8 @@ export default function App() {
 
       {/* </View> */}
     </View>
+
+    <View style={styles.main}> </View>
   );
 }
 
@@ -148,11 +149,7 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 3
   },
-  listItem: {
-    padding: 10,
-    marginVertical: 10,
-    backgroundColor: '#ccc',
-    borderColor: 'black',
-    borderWidth: 1
-  }
+
 });
+
+
