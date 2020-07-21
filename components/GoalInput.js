@@ -8,8 +8,20 @@ const GoalInput = props => {
         setEnteredGoal(enteredText);
     }    
 
+    const addGoalHandlerCombo = () => {
+        props.addGoalHandler(enteredGoal); 
+        setEnteredGoal('');
+    }
+
+    const onCancelHandler = () => {
+        props.onCancel();
+        setEnteredGoal('');
+    }
+
     return (
         <Modal visible={props.visible} animationType="slide">
+            {/* the view only takes the space that its children need  */}
+            {/* so if you want to center everything, some work is needed  */}
             <View style={styles.inputContainer} >
                 <TextInput 
                     placeholder="Course Goal" 
@@ -18,9 +30,15 @@ const GoalInput = props => {
                     value={enteredGoal}
                 /> 
                 <Button 
-                    title="add" 
-                    onPress={() => {props.addGoalHandler(enteredGoal); setEnteredGoal('')}}
+                    title="Cancel"
+                    color="red"
+                    onPress={onCancelHandler}
                 />
+                <Button 
+                    title="Add New Goal" 
+                    onPress={addGoalHandlerCombo}
+                />
+                
             </View>
         </Modal>
     )
@@ -30,15 +48,16 @@ export default GoalInput;
 
 const styles = StyleSheet.create({
     inputContainer: {
-      flexDirection: 'row', 
-      justifyContent: 'space-between', 
-      alignItems: 'center'
+        flex: 1,
+        // flex one takes up the entire parent element's space 
+        // flexDirection: 'column', 
+        justifyContent: 'center', 
+        alignItems: 'center'
     }, 
     inputBox: {
-      borderColor: 'black', 
-      borderWidth: 1, 
-      padding: 10,
-      flex: 3
+        borderColor: 'black', 
+        borderWidth: 1, 
+        padding: 10,
     },
   });
   

@@ -16,12 +16,19 @@ export default function App() {
       ...currentGoals, 
       { id: Math.random().toString(), value: enteredGoal }
     ]);
+    setIsAddMode(false)
+
+    // two setStates here but it re-renders once, which is good
   }
 
   const removeGoalHandler = goalId => {
     setCourseGoals(currentGoals => {
       return currentGoals.filter((goal) => goal.id !== goalId)
     })
+  }
+
+  const cancelGoalAdditionHandler = () => {
+    setIsAddMode(false)
   }
 
   return (
@@ -47,6 +54,7 @@ export default function App() {
       <GoalInput 
         addGoalHandler={addGoalHandler}
         visible={isAddMode}
+        onCancel={cancelGoalAdditionHandler}
       />
 
       <FlatList 
