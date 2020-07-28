@@ -12,6 +12,10 @@ export default function App() {
   //   setEnteredGoal(enteredText);
   // }
   const addGoalHandler = (enteredGoal) => {
+    if (enteredGoal.length === 0) {
+      return; 
+    }
+    // just exit if there wasn't anything entered 
     setCourseGoals(currentGoals => [
       ...currentGoals, 
       { id: Math.random().toString(), value: enteredGoal }

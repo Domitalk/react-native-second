@@ -44,7 +44,6 @@ const GoalInput = props => {
                         />
                     </View>
                 </View>
-            
             </View>
         </Modal>
     )
