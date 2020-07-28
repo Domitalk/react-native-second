@@ -16,7 +16,7 @@ export default function App() {
       ...currentGoals, 
       { id: Math.random().toString(), value: enteredGoal }
     ]);
-    setIsAddMode(false)
+    setIsAddMode(false);
 
     // two setStates here but it re-renders once, which is good
   }
